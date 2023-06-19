@@ -5,13 +5,11 @@ import { LogInDialogComponent } from './log-in-dialog/log-in-dialog.component';
 export class LoginData {
 	ip: string;
 	port: string;
-	username: string;
 	password: string;
 
 	constructor() {
 		this.ip = '';
 		this.port = '';
-		this.username = '';
 		this.password = '';
 	}
 }
@@ -36,7 +34,7 @@ export class AppComponent {
 
 	ngOnInit(): void {
 		if (!this.login?.ip) {
-			const dialogRef = this.dialog.open(LogInDialogComponent, {data: this.login});
+			const dialogRef = this.dialog.open(LogInDialogComponent, {data: this.login, disableClose: true, width: '20%'});
 			dialogRef.afterClosed().subscribe(result => {
 				this.login = result;
 				localStorage.setItem(this.title, JSON.stringify(this.login));

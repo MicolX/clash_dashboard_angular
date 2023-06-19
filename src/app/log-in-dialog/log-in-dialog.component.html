@@ -1,24 +1,25 @@
 <div mat-dialog-content>
     <mat-card-header>
-        <mat-card-title>Log in</mat-card-title>
+        <mat-card-title>Login</mat-card-title>
     </mat-card-header>
-    <form>
-        <mat-card-content>
-            <mat-form-field>
-                <input matInput placeholder="IP" [(ngModel)]="data.ip" name="ip">
+    
+    <mat-card-content>
+        <form>
+            <mat-form-field class="login-input-field">
+                <mat-label>IP</mat-label>
+                <input matInput placeholder="127.0.0.1" [(ngModel)]="data.ip" name="ip">
             </mat-form-field>
-            <mat-form-field>
-                <input matInput placeholder="Port" [(ngModel)]="data.port" name="port">
+            <mat-form-field class="login-input-field">
+                <mat-label>Port</mat-label>
+                <input matInput placeholder="7890" [(ngModel)]="data.port" name="port">
             </mat-form-field>
-            <mat-form-field>
-                <input matInput placeholder="Username" [(ngModel)]="data.username" name="username">
+            <mat-form-field class="login-input-field">
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="****" [(ngModel)]="data.password" name="password">
             </mat-form-field>
-            <mat-form-field>
-                <input matInput placeholder="Password" [(ngModel)]="data.password" name="password">
-            </mat-form-field>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-raised-button color="primary" (onclick)="onClick()">Log in</button>
-        </mat-card-actions>
-    </form>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="onClick()">Login</button>
+    </mat-card-actions>
 </div>
