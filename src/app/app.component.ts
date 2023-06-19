@@ -5,12 +5,12 @@ import { LogInDialogComponent } from './log-in-dialog/log-in-dialog.component';
 export class LoginData {
 	ip: string;
 	port: string;
-	password: string;
+	secret: string;
 
 	constructor() {
 		this.ip = '';
 		this.port = '';
-		this.password = '';
+		this.secret = '';
 	}
 }
 
