@@ -9,16 +9,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { BackendService } from './service/backend-service.service';
+import { HttpService } from './service/http-service.service';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list'
 import { LogInDialogComponent } from './log-in-dialog/log-in-dialog.component';
 import {MatIconModule} from '@angular/material/icon';
+import { LogMonitorComponent } from './log-monitor/log-monitor.component';
 @NgModule({
   declarations: [
     AppComponent,
-    LogInDialogComponent
+    LogInDialogComponent,
+    LogMonitorComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,7 @@ import {MatIconModule} from '@angular/material/icon';
     MatListModule,
     MatIconModule
   ],
-  providers: [BackendService],
+  providers: [HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
