@@ -9,9 +9,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpService } from './service/http-service.service';
-
+import { BackendService } from './service/backend-service.service';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list'
 import { LogInDialogComponent } from './log-in-dialog/log-in-dialog.component';
+import {MatIconModule} from '@angular/material/icon';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,9 +29,13 @@ import { LogInDialogComponent } from './log-in-dialog/log-in-dialog.component';
 		FormsModule,
 		MatInputModule,
 		MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule,
+    MatIconModule
   ],
-  providers: [HttpService],
+  providers: [BackendService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
