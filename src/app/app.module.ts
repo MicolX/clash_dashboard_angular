@@ -22,7 +22,7 @@ import { ProxyComponent } from './proxy/proxy.component';
 import { ConnectionsComponent } from './connections/connections.component';
 import { ProviderComponent } from './provider/provider.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {path: 'logs', component: LogMonitorComponent, data: { title: 'Log', icon: 'assignment'}},
   {path: 'proxies', component: ProxyComponent, data: { title: 'Proxies', icon: 'local_parking'}},
   {path: 'connections', component: ConnectionsComponent, data: { title: 'Connections', icon: 'cable'}},

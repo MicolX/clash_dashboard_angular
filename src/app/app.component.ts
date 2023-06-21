@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LogInDialogComponent } from './log-in-dialog/log-in-dialog.component';
+import { routes } from './app.module';
 
 export class LoginData {
 	ip: string;
@@ -20,6 +21,7 @@ export class LoginData {
 	styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+	routes = routes;
 	title = 'clash-dashboard-angular';
 	login: LoginData|null;
 
