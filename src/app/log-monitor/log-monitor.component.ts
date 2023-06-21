@@ -21,12 +21,11 @@ export class LogMonitorComponent {
     this.logs = new Array();
     if (this.login) {
       const url = 'ws://' + this.login.ip + ':' + this.login.port + '/logs';
-      webSocket({
-        url: url,
-        deserializer: 
-      }).subscribe({
-        next: msg => this.logs.push(msg)
-      })
+      webSocket(url).subscribe({
+        next: msg => this.logs.push(msg as LogData),
+        error: err => console.log(err),
+        complete: () => console.log('complete')
+      });
     }
   }
 }

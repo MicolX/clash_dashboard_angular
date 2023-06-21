@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,11 +17,27 @@ import { MatListModule } from '@angular/material/list'
 import { LogInDialogComponent } from './log-in-dialog/log-in-dialog.component';
 import {MatIconModule} from '@angular/material/icon';
 import { LogMonitorComponent } from './log-monitor/log-monitor.component';
+import { NavItemComponent } from './nav-item/nav-item.component';
+import { ProxyComponent } from './proxy/proxy.component';
+import { ConnectionsComponent } from './connections/connections.component';
+import { ProviderComponent } from './provider/provider.component';
+
+const routes: Routes = [
+  {path: 'logs', component: LogMonitorComponent, data: { title: 'Log', icon: 'assignment'}},
+  {path: 'proxies', component: ProxyComponent, data: { title: 'Proxies', icon: 'local_parking'}},
+  {path: 'connections', component: ConnectionsComponent, data: { title: 'Connections', icon: 'cable'}},
+  {path: 'providers', component: ProviderComponent, data: { title: 'Provider', icon: 'real_estate_agent'}}
+]
+
 @NgModule({
   declarations: [
     AppComponent,
     LogInDialogComponent,
-    LogMonitorComponent
+    LogMonitorComponent,
+    NavItemComponent,
+    ProxyComponent,
+    ConnectionsComponent,
+    ProviderComponent
   ],
   imports: [
     BrowserModule,
@@ -35,9 +52,10 @@ import { LogMonitorComponent } from './log-monitor/log-monitor.component';
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

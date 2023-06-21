@@ -4,26 +4,10 @@
 <mat-sidenav-container class="nav-container" autosize>
 	<mat-sidenav #sidenav class="sidenav" mode="side" opened="true">
     <mat-nav-list>
-      <mat-list-item class="list-item">
-        <mat-icon matListItemIcon class="list-icon">home</mat-icon>
-        <h3 matListItemTitle>Proxies</h3>
-      </mat-list-item>
-      <mat-list-item class="list-item">
-        <mat-icon matListItemIcon class="list-icon">assignment</mat-icon>
-        <h3 matListItemTitle>Log</h3>
-      </mat-list-item>
-      <mat-list-item class="list-item">
-        <mat-icon matListItemIcon class="list-icon">cable</mat-icon>
-        <h3 matListItemTitle>Connections</h3>
-      </mat-list-item>
-      <mat-list-item class="list-item">
-        <mat-icon matListItemIcon class="list-icon">real_estate_agent</mat-icon>
-        <h3 matListItemTitle>Provider</h3>
-      </mat-list-item>
+      <app-nav-item *ngFor="let route of routes" title="route.data.title" icon="route.data.icon" path="route.path"></app-nav-item>
     </mat-nav-list>
   </mat-sidenav>
-	<div class="sidenav-content">
-		Login to show content
-	</div>
-
+	<mat-sidenav-content class="sidenav-content">
+		<router-outlet></router-outlet>
+	</mat-sidenav-content>
 </mat-sidenav-container>
