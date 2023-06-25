@@ -2,18 +2,8 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LogInDialogComponent } from './log-in-dialog/log-in-dialog.component';
 import { routes } from './app.module';
+import { LoginData } from './model/login-data';
 
-export class LoginData {
-	ip: string;
-	port: string;
-	secret: string;
-
-	constructor() {
-		this.ip = '';
-		this.port = '';
-		this.secret = '';
-	}
-}
 
 @Component({
 	selector: 'app-root',
@@ -23,23 +13,25 @@ export class LoginData {
 export class AppComponent {
 	routes = routes;
 	title = 'clash-dashboard-angular';
-	login: LoginData|null;
+	loginData: LoginData;
 
-	constructor(public dialog: MatDialog) {
+	constructor(public dialog: MatDialog, login: LoginData) {
+		this.loginData = login;
 		let localString = localStorage.getItem(this.title);
 		if (localString) {
-			this.login = JSON.parse(localString);
-		} else {
-			this.login = new LoginData();
+			let loginData = JSON.parse(localString);
+			this.loginData.ip = loginData?.ip;
+			this.loginData.port = loginData?.port;
+			this.loginData.secret = loginData?.secret;
 		}
 	 }
 
 	ngOnInit(): void {
-		if (!this.login?.ip) {
-			const dialogRef = this.dialog.open(LogInDialogComponent, {data: this.login, disableClose: true, width: '20%'});
+		if (!this.loginData.ip || !this.loginData.port) {
+			const dialogRef = this.dialog.open(LogInDialogComponent, {data: this.loginData, disableClose: true, width: '20%'});
 			dialogRef.afterClosed().subscribe(result => {
-				this.login = result;
-				localStorage.setItem(this.title, JSON.stringify(this.login));
+				this.loginData = result;
+				localStorage.setItem(this.title, JSON.stringify(this.loginData));
 			})
 		}
 	}

@@ -15,12 +15,13 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list'
 import { LogInDialogComponent } from './log-in-dialog/log-in-dialog.component';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { LogMonitorComponent } from './log-monitor/log-monitor.component';
 import { NavItemComponent } from './nav-item/nav-item.component';
 import { ProxyComponent } from './proxy/proxy.component';
 import { ConnectionsComponent } from './connections/connections.component';
 import { ProviderComponent } from './provider/provider.component';
+import { LoginData } from './model/login-data';
 
 export const routes: Routes = [
   {path: 'logs', component: LogMonitorComponent, data: { title: 'Log', icon: 'assignment'}},
@@ -55,7 +56,7 @@ export const routes: Routes = [
     MatIconModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [HttpService],
+  providers: [HttpService, LoginData],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { LoginData } from '../app.component';
+import { LoginData } from '../model/login-data';
+
 
 @Injectable({
   providedIn: 'root'

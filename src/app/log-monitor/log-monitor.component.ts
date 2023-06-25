@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { HttpService } from '../service/http-service.service';
-import { LoginData } from '../app.component';
 import { webSocket, WebSocketSubjectConfig } from 'rxjs/webSocket';
+import { LoginData } from '../model/login-data';
 
 interface LogData {
   type: string;
@@ -15,12 +15,11 @@ interface LogData {
 })
 export class LogMonitorComponent {
   logs: LogData[];
-  @Input() private login: LoginData|undefined;
 
-  constructor(private service: HttpService) {
+  constructor(private service: HttpService, login: LoginData) {
     this.logs = new Array();
-    if (this.login) {
-      const url = 'ws://' + this.login.ip + ':' + this.login.port + '/logs';
+    if (login) {
+      const url = 'ws://' + login.ip + ':' + login.port + '/logs';
       webSocket(url).subscribe({
         next: msg => this.logs.push(msg as LogData),
         error: err => console.log(err),

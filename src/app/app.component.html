@@ -4,7 +4,7 @@
 <mat-sidenav-container class="nav-container" autosize>
 	<mat-sidenav #sidenav class="sidenav" mode="side" opened="true">
     <mat-nav-list>
-      <app-nav-item *ngFor="let route of routes" title="route.data.title" icon="route.data.icon" path="route.path"></app-nav-item>
+      <app-nav-item *ngFor="let route of routes" [title]="route.data?.['title']" [icon]="route.data?.['icon']" [path]="route.path"></app-nav-item>
     </mat-nav-list>
   </mat-sidenav>
 	<mat-sidenav-content class="sidenav-content">
