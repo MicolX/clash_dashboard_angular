@@ -10,13 +10,13 @@
 }
 .sidenav {
     user-select: none;
-    width: 10%;
+    width: 15%;
 }
 .icon-title {
     width: 100%;
 }
 .list-icon {
-    margin-right: 10px !important;
+    margin-right: 10px;
 }
 .list-item {
     width: 100%;
