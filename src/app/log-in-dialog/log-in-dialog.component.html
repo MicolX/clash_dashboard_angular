@@ -11,11 +11,11 @@
             </mat-form-field>
             <mat-form-field class="login-input-field">
                 <mat-label>Port</mat-label>
-                <input matInput placeholder="7890" [(ngModel)]="data.port" name="port">
+                <input matNativeControl type="number" placeholder="7890" [(ngModel)]="data.port" name="port">
             </mat-form-field>
             <mat-form-field class="login-input-field">
                 <mat-label>Password</mat-label>
-                <input matInput placeholder="****" [(ngModel)]="data.secret" name="secret">
+                <input matNativeControl type="password" placeholder="****" [(ngModel)]="data.secret" name="secret">
             </mat-form-field>
         </form>
     </mat-card-content>

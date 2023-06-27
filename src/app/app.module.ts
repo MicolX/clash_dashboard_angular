@@ -24,10 +24,10 @@ import { ProviderComponent } from './provider/provider.component';
 import { LoginData } from './model/login-data';
 
 export const routes: Routes = [
-  {path: 'logs', component: LogMonitorComponent, data: { title: 'Log', icon: 'assignment'}},
   {path: 'proxies', component: ProxyComponent, data: { title: 'Proxies', icon: 'local_parking'}},
   {path: 'connections', component: ConnectionsComponent, data: { title: 'Connections', icon: 'cable'}},
-  {path: 'providers', component: ProviderComponent, data: { title: 'Provider', icon: 'real_estate_agent'}}
+  {path: 'providers', component: ProviderComponent, data: { title: 'Provider', icon: 'real_estate_agent'}},
+  {path: 'logs', component: LogMonitorComponent, data: { title: 'Log', icon: 'assignment'}}
 ]
 
 @NgModule({
