@@ -22,12 +22,15 @@ import { ProxyComponent } from './proxy/proxy.component';
 import { ConnectionsComponent } from './connections/connections.component';
 import { ProviderComponent } from './provider/provider.component';
 import { LoginData } from './model/login-data';
+import { ConfigComponent } from './config/config.component';
+import { ConfigDataComponent } from './config-data/config-data.component';
 
 export const routes: Routes = [
   {path: 'proxies', component: ProxyComponent, data: { title: 'Proxies', icon: 'local_parking'}},
   {path: 'connections', component: ConnectionsComponent, data: { title: 'Connections', icon: 'cable'}},
   {path: 'providers', component: ProviderComponent, data: { title: 'Provider', icon: 'real_estate_agent'}},
-  {path: 'logs', component: LogMonitorComponent, data: { title: 'Log', icon: 'assignment'}}
+  {path: 'logs', component: LogMonitorComponent, data: { title: 'Log', icon: 'assignment'}},
+  {path: 'config', component: ConfigComponent, data: { title: 'Configuration', icon: 'settings'}}
 ]
 
 @NgModule({
@@ -38,7 +41,9 @@ export const routes: Routes = [
     NavItemComponent,
     ProxyComponent,
     ConnectionsComponent,
-    ProviderComponent
+    ProviderComponent,
+    ConfigComponent,
+    ConfigDataComponent
   ],
   imports: [
     BrowserModule,
