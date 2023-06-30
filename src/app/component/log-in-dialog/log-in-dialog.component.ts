@@ -1,6 +1,6 @@
 import { Component, Inject, inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
-import { LoginData } from '../model/login-data';
+import { LoginData } from '../../model/login-data';
 
 @Component({
 	selector: 'app-log-in-dialog',

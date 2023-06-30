@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { LogInDialogComponent } from './log-in-dialog/log-in-dialog.component';
+import { LogInDialogComponent } from './component/log-in-dialog/log-in-dialog.component';
 import { routes } from './app.module';
 import { LoginData } from './model/login-data';
-import { ConfigData } from './model/config-data';
-import { HttpService } from './service/http-service.service';
+import { UrlService } from './service/url-service.service';
 
 
 @Component({
@@ -16,13 +15,10 @@ export class AppComponent {
 	routes = routes;
 	title = 'clash-dashboard-angular';
 	loginData: LoginData;
-	configData: ConfigData;
-	http: HttpService;
 
-	constructor(public dialog: MatDialog, login: LoginData, config: ConfigData, http: HttpService) {
+	constructor(public dialog: MatDialog, login: LoginData, http: UrlService) {
 		this.loginData = login;
-		this.configData = config;
-		this.http = http;
+		
 		let localString = localStorage.getItem(this.title);
 		if (localString) {
 			let loginData = JSON.parse(localString);
@@ -38,11 +34,9 @@ export class AppComponent {
 			dialogRef.afterClosed().subscribe(result => {
 				this.loginData = result;
 				localStorage.setItem(this.title, JSON.stringify(this.loginData));
-				this.http.getConfigs().then((result) => {
+				this.http.getConfigs().subscribe(result => {
 					this.configData = result;
-				}).catch((err) => {
-					console.log(err);
-				});
+				})
 			});
 		}
 

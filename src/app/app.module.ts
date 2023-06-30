@@ -10,20 +10,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpService } from './service/http-service.service';
+import { UrlService } from './service/url-service.service';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list'
-import { LogInDialogComponent } from './log-in-dialog/log-in-dialog.component';
+import { LogInDialogComponent } from './component/log-in-dialog/log-in-dialog.component';
 import { MatIconModule } from '@angular/material/icon';
-import { LogMonitorComponent } from './log-monitor/log-monitor.component';
-import { NavItemComponent } from './nav-item/nav-item.component';
-import { ProxyComponent } from './proxy/proxy.component';
-import { ConnectionsComponent } from './connections/connections.component';
-import { ProviderComponent } from './provider/provider.component';
+import { LogMonitorComponent } from './component/log-monitor/log-monitor.component';
+import { NavItemComponent } from './component/nav-item/nav-item.component';
+import { ProxyComponent } from './component/proxy/proxy.component';
+import { ConnectionsComponent } from './component/connections/connections.component';
+import { ProviderComponent } from './component/provider/provider.component';
 import { LoginData } from './model/login-data';
-import { ConfigComponent } from './config/config.component';
-import { ConfigDataComponent } from './config-data/config-data.component';
+import { ConfigComponent } from './component/config/config.component';
+import { ConfigService } from './service/config.service';
 
 export const routes: Routes = [
   {path: 'proxies', component: ProxyComponent, data: { title: 'Proxies', icon: 'local_parking'}},
@@ -42,8 +42,7 @@ export const routes: Routes = [
     ProxyComponent,
     ConnectionsComponent,
     ProviderComponent,
-    ConfigComponent,
-    ConfigDataComponent
+    ConfigComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +60,7 @@ export const routes: Routes = [
     MatIconModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [HttpService, LoginData],
+  providers: [UrlService, LoginData, ConfigService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
