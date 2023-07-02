@@ -15,3 +15,9 @@ export interface Version {
     premium: boolean,
     version: string
 }
+
+export interface LoginData {
+  address: string,
+  port: number,
+  secret?: string;
+}
