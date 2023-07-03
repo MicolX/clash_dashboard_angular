@@ -1,8 +1,7 @@
 import { Component, Inject, inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
-import { LoginData, Version } from '../../model/types';
+import { LoginData, TITLE, Version } from '../../model/types';
 import { BaseService } from 'src/app/service/base.service';
-import { Observer } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -20,7 +19,7 @@ export class LogInDialogComponent {
 	) {
 		this.data = {
 			address: '127.0.0.1',
-			port: 7890
+			port: 9090
 		}
 	}
 
@@ -33,9 +32,10 @@ export class LogInDialogComponent {
 		this.base.startLogin({
 			next: this.base.handleLoginNext,
 			error: (e: HttpErrorResponse) => {
-				this.error = e.error;
+				this.error = e.message;
 			},
 			complete: () => {
+				localStorage.setItem(TITLE, JSON.stringify(this.data));
 				this.dialogRef.close();
 			}
 		});

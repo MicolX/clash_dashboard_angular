@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Version, ConfigData, LoginData } from '../model/types'
+import { Version, ConfigData, LoginData, TITLE } from '../model/types'
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { MatDialogRef } from '@angular/material/dialog';
 import { LogInDialogComponent } from '../component/log-in-dialog/log-in-dialog.component';
@@ -19,7 +19,6 @@ export class BaseService {
   private http: HttpClient;
   private headers: HttpHeaders;
   private params: HttpParams;
-  private title = 'clash-dashboard-angular';
 
   constructor(http: HttpClient) {
     this.http = http; 
@@ -53,27 +52,27 @@ export class BaseService {
 
   public startLogin(observer: Observer<Version>) {
     if (this._login?.secret) {
-      this.headers.set('Authorization', 'Bearer ' + this._login.secret);
+      this.headers = this.headers.set('Authorization', 'Bearer ' + this._login.secret);
     }
     this.http.get<Version>(this.getHttpUrl('version'), {headers: this.headers}).subscribe(observer);
   }
 
   public handleLoginNext(version: Version) {
     this._version = version;
+    console.log(`get ${JSON.stringify(this._version)}`);
     if (this._login?.secret) {
-      this.params.set('secret', this._login?.secret);
+      this.params = this.params.set('secret', this._login?.secret);
     }
-    localStorage.setItem(this.title, JSON.stringify(this._login));
   }
 
   public loadLocalStorage() {
-    let localString = localStorage.getItem(this.title);
+    let localString = localStorage.getItem(TITLE);
 		if (localString) {
 			try {
 				let loginData = JSON.parse(localString);
 				this._login = {...loginData};
 			} catch {
-				localStorage.removeItem(this.title);
+				localStorage.removeItem(TITLE);
 			}
 		}
   }

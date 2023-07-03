@@ -15,27 +15,27 @@ import { Version } from './model/types';
 })
 export class AppComponent {
 	routes = routes;
-	
+	version: Version | undefined;
 	private baseService: BaseService;
 
 	constructor(public dialog: MatDialog, http: UrlService, base: BaseService) {
 		this.baseService = base;
-		
 	}
 
 	ngOnInit(): void {
 		this.baseService.loadLocalStorage();
 		if (!this.baseService.login) {
-			this.popupLogin().afterClosed().subscribe(result => {
-				this.baseService.login = {...result}
-			});
+			this.popupLogin().afterClosed().subscribe((value: Version) => {this.version = value; });
 		} else {
 			const observer: Observer<Version> = {
 				next: this.baseService.handleLoginNext,
 				error: (e) => {
-					this.popupLogin();
+					this.popupLogin().afterClosed().subscribe((value: Version) => {this.version = value});
 				},
-				complete: () => {}
+				complete: () => {
+					this.version = this.baseService.version;
+					console.log(this.baseService.version);
+				}
 			}
 			this.baseService.startLogin(observer);
 		}

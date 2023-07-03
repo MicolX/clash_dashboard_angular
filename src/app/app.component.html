@@ -1,5 +1,9 @@
 <mat-toolbar color="primary">
 	<h1>Clash DashBoard</h1>
+	<div *ngIf="version">
+		<span *ngIf="version.premium">Premium🌟</span>
+		<span>{{version.version}}</span>
+	</div>
 </mat-toolbar>
 <mat-sidenav-container class="nav-container" autosize>
 	<mat-sidenav #sidenav class="sidenav" mode="side" opened="true">

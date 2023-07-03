@@ -21,3 +21,5 @@ export interface LoginData {
   port: number,
   secret?: string;
 }
+
+export const TITLE = 'clash-dashboard-angular';
