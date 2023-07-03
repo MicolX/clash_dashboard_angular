@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Version, ConfigData, LoginData } from '../model/types'
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
-import { catchError } from 'rxjs';
-
+import { MatDialogRef } from '@angular/material/dialog';
+import { LogInDialogComponent } from '../component/log-in-dialog/log-in-dialog.component';
+import { Observer } from 'rxjs';
 
 
 @Injectable({
@@ -18,6 +19,7 @@ export class BaseService {
   private http: HttpClient;
   private headers: HttpHeaders;
   private params: HttpParams;
+  private title = 'clash-dashboard-angular';
 
   constructor(http: HttpClient) {
     this.http = http; 
@@ -49,25 +51,31 @@ export class BaseService {
     return `ws://${this._login?.address}:${this._login?.port}/${endPoint}`;
   }
 
-  private handleError(error: HttpErrorResponse) {
-    if (error.status === 0) {
-      // client-side/network error
-
-    }
-  }
-
-  public startLogin() {
+  public startLogin(observer: Observer<Version>) {
     if (this._login?.secret) {
       this.headers.set('Authorization', 'Bearer ' + this._login.secret);
     }
-    this.http.get<Version>(this.getHttpUrl('version'), {
-      headers: this.headers
-    }).pipe(catchError(this.handleError)).subscribe((value: Version) => {
-      this._version = value
-      if (this._login?.secret) {
-        this.params.set('secret', this._login?.secret);
-      }
-    });
+    this.http.get<Version>(this.getHttpUrl('version'), {headers: this.headers}).subscribe(observer);
+  }
+
+  public handleLoginNext(version: Version) {
+    this._version = version;
+    if (this._login?.secret) {
+      this.params.set('secret', this._login?.secret);
+    }
+    localStorage.setItem(this.title, JSON.stringify(this._login));
+  }
+
+  public loadLocalStorage() {
+    let localString = localStorage.getItem(this.title);
+		if (localString) {
+			try {
+				let loginData = JSON.parse(localString);
+				this._login = {...loginData};
+			} catch {
+				localStorage.removeItem(this.title);
+			}
+		}
   }
 
   public getConfig() {

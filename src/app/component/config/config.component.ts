@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UrlService } from '../../service/url-service.service';
-import { ConfigData } from '../../service/config.service';
+import { ConfigData } from '../../model/types';
 import { ConfigService } from 'src/app/service/config.service';
 
 

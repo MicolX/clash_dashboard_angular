@@ -4,6 +4,8 @@ import { LogInDialogComponent } from './component/log-in-dialog/log-in-dialog.co
 import { routes } from './app.module';
 import { UrlService } from './service/url-service.service';
 import { BaseService } from './service/base.service';
+import { Observer } from 'rxjs';
+import { Version } from './model/types';
 
 
 @Component({
@@ -13,30 +15,33 @@ import { BaseService } from './service/base.service';
 })
 export class AppComponent {
 	routes = routes;
-	title = 'clash-dashboard-angular';
+	
 	private baseService: BaseService;
 
 	constructor(public dialog: MatDialog, http: UrlService, base: BaseService) {
 		this.baseService = base;
-		let localString = localStorage.getItem(this.title);
-		if (localString) {
-			try {
-				let loginData = JSON.parse(localString);
-				this.baseService.login = {...loginData};
-			} catch {
-				localStorage.removeItem(this.title);
-			}
-		}
+		
 	}
 
 	ngOnInit(): void {
+		this.baseService.loadLocalStorage();
 		if (!this.baseService.login) {
-			const dialogRef = this.dialog.open(LogInDialogComponent, {disableClose: true, width: '20%'});
-			dialogRef.afterClosed().subscribe(result => {
+			this.popupLogin().afterClosed().subscribe(result => {
 				this.baseService.login = {...result}
-				this.baseService.getVersion();
 			});
+		} else {
+			const observer: Observer<Version> = {
+				next: this.baseService.handleLoginNext,
+				error: (e) => {
+					this.popupLogin();
+				},
+				complete: () => {}
+			}
+			this.baseService.startLogin(observer);
 		}
+	}
 
+	private popupLogin() {
+		return this.dialog.open(LogInDialogComponent, {disableClose: true, width: '20%'});
 	}
 }

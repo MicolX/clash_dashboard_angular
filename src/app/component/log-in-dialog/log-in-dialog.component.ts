@@ -1,7 +1,9 @@
 import { Component, Inject, inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
-import { LoginData } from '../../model/types';
+import { LoginData, Version } from '../../model/types';
 import { BaseService } from 'src/app/service/base.service';
+import { Observer } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
 	selector: 'app-log-in-dialog',
@@ -10,6 +12,8 @@ import { BaseService } from 'src/app/service/base.service';
 })
 export class LogInDialogComponent {
 	data: LoginData
+	error: string | undefined;
+
 	constructor(
 		public dialogRef: MatDialogRef<LogInDialogComponent>,
 		private base: BaseService
@@ -21,7 +25,19 @@ export class LogInDialogComponent {
 	}
 
 	onClick():void {
-		this.base.startLogin()
-		this.dialogRef.close(this.data);
+		this.base.login = {
+			address: this.data.address,
+			port: this.data.port,
+			secret: this.data.secret
+		}
+		this.base.startLogin({
+			next: this.base.handleLoginNext,
+			error: (e: HttpErrorResponse) => {
+				this.error = e.error;
+			},
+			complete: () => {
+				this.dialogRef.close();
+			}
+		});
 	}
 }
