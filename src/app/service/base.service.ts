@@ -59,7 +59,6 @@ export class BaseService {
 
   public handleLoginNext(version: Version) {
     this._version = version;
-    console.log(`get ${JSON.stringify(this._version)}`);
     if (this._login?.secret) {
       this.params = this.params.set('secret', this._login?.secret);
     }

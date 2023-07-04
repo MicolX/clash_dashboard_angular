@@ -1,15 +1,15 @@
 <mat-toolbar color="primary">
 	<h1>Clash DashBoard</h1>
-	<div *ngIf="version">
-		<span *ngIf="version.premium">Premium🌟</span>
-		<span>{{version.version}}</span>
-	</div>
 </mat-toolbar>
 <mat-sidenav-container class="nav-container" autosize>
 	<mat-sidenav #sidenav class="sidenav" mode="side" opened="true">
     <mat-nav-list>
       <app-nav-item *ngFor="let route of routes" [title]="route.data?.['title']" [icon]="route.data?.['icon']" [path]="route.path"></app-nav-item>
     </mat-nav-list>
+	<footer *ngIf="version">
+		<mat-label *ngIf="version.premium">Premium🌟</mat-label>
+		<span>{{version.version}}</span>
+	</footer>
   </mat-sidenav>
 	<mat-sidenav-content class="sidenav-content">
 		<router-outlet></router-outlet>

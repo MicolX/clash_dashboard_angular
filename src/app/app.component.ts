@@ -25,16 +25,21 @@ export class AppComponent {
 	ngOnInit(): void {
 		this.baseService.loadLocalStorage();
 		if (!this.baseService.login) {
-			this.popupLogin().afterClosed().subscribe((value: Version) => {this.version = value; });
+			this.popupLogin().afterClosed().subscribe((value: Version) => {
+				this.version = this.baseService.version; 
+			});
 		} else {
 			const observer: Observer<Version> = {
-				next: this.baseService.handleLoginNext,
+				next: (value: Version) => {
+					this.baseService.handleLoginNext(value);
+				},
 				error: (e) => {
-					this.popupLogin().afterClosed().subscribe((value: Version) => {this.version = value});
+					this.popupLogin().afterClosed().subscribe((value: Version) => {
+						this.version = this.baseService.version; 
+					});
 				},
 				complete: () => {
 					this.version = this.baseService.version;
-					console.log(this.baseService.version);
 				}
 			}
 			this.baseService.startLogin(observer);

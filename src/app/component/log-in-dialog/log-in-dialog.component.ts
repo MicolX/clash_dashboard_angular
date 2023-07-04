@@ -30,7 +30,9 @@ export class LogInDialogComponent {
 			secret: this.data.secret
 		}
 		this.base.startLogin({
-			next: this.base.handleLoginNext,
+			next: (value: Version) => {
+				this.base.handleLoginNext(value);
+			},
 			error: (e: HttpErrorResponse) => {
 				this.error = e.message;
 			},

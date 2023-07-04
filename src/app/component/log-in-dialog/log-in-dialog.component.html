@@ -22,4 +22,7 @@
     <mat-card-actions>
         <button mat-raised-button color="primary" (click)="onClick()">Login</button>
     </mat-card-actions>
+    <div *ngIf="error">
+        <span>{{error}}</span>
+    </div>
 </div>
