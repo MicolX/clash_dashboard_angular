@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { UrlService } from '../../service/url-service.service';
 import { ConfigData } from '../../model/types';
-import { ConfigService } from 'src/app/service/config.service';
+import { BaseService } from 'src/app/service/base.service';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -10,10 +10,16 @@ import { ConfigService } from 'src/app/service/config.service';
   styleUrls: ['./config.component.css']
 })
 export class ConfigComponent {
-  configData: ConfigData | undefined;
+  config: ConfigData | undefined;
 
-  constructor(private http: UrlService, private config: ConfigService) {
-    this.configData = config.getConfig();
+  constructor(
+    private base: BaseService,
+    private http: HttpClient
+    ) {
+  }
+
+  ngOnInit(): void {
+    this.config = this.base.config;
   }
 }
 

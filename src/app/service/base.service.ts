@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Version, ConfigData, LoginData, TITLE } from '../model/types'
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
-import { MatDialogRef } from '@angular/material/dialog';
-import { LogInDialogComponent } from '../component/log-in-dialog/log-in-dialog.component';
 import { Observer } from 'rxjs';
 
 
@@ -16,14 +14,12 @@ export class BaseService {
   private _login: LoginData | undefined;
   private _version: Version | undefined;
   private _config: ConfigData | undefined;
-  private http: HttpClient;
-  private headers: HttpHeaders;
-  private params: HttpParams;
+  private _headers: HttpHeaders;
+  private _params: HttpParams;
 
-  constructor(http: HttpClient) {
-    this.http = http; 
-    this.headers = new HttpHeaders();
-    this.params = new HttpParams();
+  constructor(private http: HttpClient) {
+    this._headers = new HttpHeaders();
+    this._params = new HttpParams();
   }
 
   public get version(): Version | undefined {
@@ -36,6 +32,14 @@ export class BaseService {
   
   public get login(): LoginData | undefined {
     return this._login;
+  }
+
+  public get params(): HttpParams {
+    return this._params;
+  }
+
+  public get headers(): HttpHeaders {
+    return this._headers;
   }
   
   public set login(value: LoginData | undefined) {
@@ -52,15 +56,15 @@ export class BaseService {
 
   public startLogin(observer: Observer<Version>) {
     if (this._login?.secret) {
-      this.headers = this.headers.set('Authorization', 'Bearer ' + this._login.secret);
+      this._headers = this._headers.set('Authorization', 'Bearer ' + this._login.secret);
     }
-    this.http.get<Version>(this.getHttpUrl('version'), {headers: this.headers}).subscribe(observer);
+    this.http.get<Version>(this.getHttpUrl('version'), {headers: this._headers}).subscribe(observer);
   }
 
   public handleLoginNext(version: Version) {
     this._version = version;
     if (this._login?.secret) {
-      this.params = this.params.set('secret', this._login?.secret);
+      this._params = this._params.set('secret', this._login?.secret);
     }
   }
 
@@ -78,10 +82,10 @@ export class BaseService {
 
   public getConfig() {
     if (this._login?.secret) {
-      this.headers.set('Authorization', 'Bearer ' + this._login.secret);
+      this._headers.set('Authorization', 'Bearer ' + this._login.secret);
     }
     this.http.get<ConfigData>(this.getHttpUrl('config'), {
-      headers: this.headers
+      headers: this._headers
     }).subscribe((value: ConfigData) => this._config = value);
   }
 }

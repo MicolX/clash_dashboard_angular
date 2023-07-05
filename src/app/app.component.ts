@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LogInDialogComponent } from './component/log-in-dialog/log-in-dialog.component';
 import { routes } from './app.module';
-import { UrlService } from './service/url-service.service';
 import { BaseService } from './service/base.service';
 import { Observer } from 'rxjs';
 import { Version } from './model/types';
@@ -16,10 +15,11 @@ import { Version } from './model/types';
 export class AppComponent {
 	routes = routes;
 	version: Version | undefined;
-	private baseService: BaseService;
 
-	constructor(public dialog: MatDialog, http: UrlService, base: BaseService) {
-		this.baseService = base;
+	constructor(
+		private dialog: MatDialog, 
+		private baseService: BaseService
+		) {
 	}
 
 	ngOnInit(): void {
@@ -40,6 +40,7 @@ export class AppComponent {
 				},
 				complete: () => {
 					this.version = this.baseService.version;
+					this.baseService.getConfig();
 				}
 			}
 			this.baseService.startLogin(observer);

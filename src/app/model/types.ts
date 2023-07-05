@@ -22,4 +22,9 @@ export interface LoginData {
   secret?: string;
 }
 
+export interface LogData {
+  type: string,
+  payload: string
+}
+
 export const TITLE = 'clash-dashboard-angular';

@@ -14,7 +14,7 @@ export class LogInDialogComponent {
 	error: string | undefined;
 
 	constructor(
-		public dialogRef: MatDialogRef<LogInDialogComponent>,
+		private dialogRef: MatDialogRef<LogInDialogComponent>,
 		private base: BaseService
 	) {
 		this.data = {
@@ -38,6 +38,7 @@ export class LogInDialogComponent {
 			},
 			complete: () => {
 				localStorage.setItem(TITLE, JSON.stringify(this.data));
+				this.base.getConfig();
 				this.dialogRef.close();
 			}
 		});

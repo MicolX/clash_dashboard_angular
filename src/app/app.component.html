@@ -7,8 +7,8 @@
       <app-nav-item *ngFor="let route of routes" [title]="route.data?.['title']" [icon]="route.data?.['icon']" [path]="route.path"></app-nav-item>
     </mat-nav-list>
 	<footer *ngIf="version">
-		<mat-label *ngIf="version.premium">Premium🌟</mat-label>
-		<span>{{version.version}}</span>
+		<p *ngIf="version.premium">Premium🌟</p>
+		<p>{{version.version}}</p>
 	</footer>
   </mat-sidenav>
 	<mat-sidenav-content class="sidenav-content">

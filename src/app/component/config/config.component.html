@@ -1,1 +1,24 @@
-<p>config works!</p>
+<div>
+    <h1>Configurations</h1>
+    <mat-form-field appearance="fill">
+        <mat-label>Mode</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{food.viewValue}}
+          </mat-option>
+        </mat-select>
+        <div>
+            <mat-label>Port</mat-label>
+            <input matNativeControl type="number" value="config.port">
+        </div>
+        
+        <mat-label>Socks Port</mat-label>
+        <input matNativeControl type="number" value="config.socksPort">
+        <mat-label>Redir Port</mat-label>
+        <input matNativeControl type="number" value="config.redirPort">
+        <mat-label>TProxy Port</mat-label>
+        <input matNativeControl type="number" value="config.tproxyPort">
+        <mat-label>Mixed Port</mat-label>
+        <input matNativeControl type="number" value="config.mixedPort">
+      </mat-form-field>
+</div>

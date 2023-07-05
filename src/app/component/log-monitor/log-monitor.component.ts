@@ -1,8 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { UrlService } from '../../service/url-service.service';
-import { webSocket, WebSocketSubjectConfig } from 'rxjs/webSocket';
-import { LoginData } from '../../model/login-data';
-import { ConfigService } from 'src/app/service/config.service';
+import { Component } from '@angular/core';
+import { webSocket } from 'rxjs/webSocket';
+import { BaseService } from 'src/app/service/base.service';
 
 interface LogData {
   type: string;
@@ -17,16 +15,17 @@ interface LogData {
 export class LogMonitorComponent {
   logs: LogData[];
 
-  constructor(private url: UrlService, login: LoginData, config: ConfigService) {
+  constructor(private base: BaseService) {
     this.logs = new Array();
-    if (login) {
-      let params = new URLSearchParams();
-      params.set('level', config.getLogLevel());
-      webSocket(url.getWsUrl('logs', params)).subscribe({
-        next: msg => this.logs.push(msg as LogData),
-        error: err => console.log(err),
-        complete: () => console.log('complete')
-      });
+    let params = base.params;
+    if (base.config?.logLevel) {
+      params = params.append('level', base.config?.logLevel);
     }
+    const url = params ? `${base.getWsUrl('logs')}?${params?.toString()}` : base.getWsUrl('logs');
+    webSocket(url).subscribe({
+      next: msg => this.logs.push(msg as LogData),
+      error: err => console.log(err),
+      complete: () => {}
+    });
   }
 }
