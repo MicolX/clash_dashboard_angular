@@ -1,24 +1,65 @@
 <div>
     <h1>Configurations</h1>
-    <mat-form-field appearance="fill">
-        <mat-label>Mode</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let food of foods" [value]="food.value">
-            {{food.viewValue}}
-          </mat-option>
-        </mat-select>
-        <div>
+    <form [formGroup]="configForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+            <mat-label>Mode</mat-label>
+            <mat-select matNativeControl formControlName="mode">
+                <mat-option *ngFor="let mode of modes" [value]="mode">
+                    {{mode}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
             <mat-label>Port</mat-label>
-            <input matNativeControl type="number" value="config.port">
-        </div>
-        
-        <mat-label>Socks Port</mat-label>
-        <input matNativeControl type="number" value="config.socksPort">
-        <mat-label>Redir Port</mat-label>
-        <input matNativeControl type="number" value="config.redirPort">
-        <mat-label>TProxy Port</mat-label>
-        <input matNativeControl type="number" value="config.tproxyPort">
-        <mat-label>Mixed Port</mat-label>
-        <input matNativeControl type="number" value="config.mixedPort">
-      </mat-form-field>
+            <input matNativeControl type="number" formControlName="port">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Socks Port</mat-label>
+            <input matNativeControl type="number" formControlName="socks-port">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Redir Port</mat-label>
+            <input matNativeControl type="number" formControlName="redir-port">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>TProxy Port</mat-label>
+            <input matNativeControl type="number" formControlName="tproxy-port">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Mixed Port</mat-label>
+            <input matNativeControl type="number" formControlName="mixed-port">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Allow LAN</mat-label>
+            <mat-slide-toggle matNativeControl formControlName="allow-lan"></mat-slide-toggle>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Bind Address</mat-label>
+            <input matNativeControl type="number" formControlName="bind-address">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Log Level</mat-label>
+            <mat-select matNativeControl formControlName="log-level">
+                <mat-option *ngFor="let level of logLevel" [value]="level">
+                    {{level}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>IPv6</mat-label>
+            <mat-slide-toggle matNativeControl formControlName="ipv6"></mat-slide-toggle>
+        </mat-form-field>
+
+    </form>    
+    
+    <button mat-raised-button color="primary" type="submit">Submit</button>
 </div>

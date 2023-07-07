@@ -18,8 +18,8 @@ export class LogMonitorComponent {
   constructor(private base: BaseService) {
     this.logs = new Array();
     let params = base.params;
-    if (base.config?.logLevel) {
-      params = params.append('level', base.config?.logLevel);
+    if (base.config && base.config['log-level']) {
+      params = params.append('level', base.config['log-level']);
     }
     const url = params ? `${base.getWsUrl('logs')}?${params?.toString()}` : base.getWsUrl('logs');
     webSocket(url).subscribe({

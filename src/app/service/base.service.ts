@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Version, ConfigData, LoginData, TITLE } from '../model/types'
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observer } from 'rxjs';
 
 
@@ -86,6 +86,6 @@ export class BaseService {
     }
     this.http.get<ConfigData>(this.getHttpUrl('config'), {
       headers: this._headers
-    }).subscribe((value: ConfigData) => this._config = value);
+    }).subscribe((value: ConfigData | any) => this._config = value);
   }
 }
