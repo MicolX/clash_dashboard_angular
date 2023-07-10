@@ -64,7 +64,7 @@ export class BaseService {
   public handleLoginNext(version: Version) {
     this._version = version;
     if (this._login?.secret) {
-      this._params = this._params.set('secret', this._login?.secret);
+      this._params = this._params.set('secret', encodeURIComponent(this._login?.secret));
     }
   }
 
@@ -84,8 +84,34 @@ export class BaseService {
     if (this._login?.secret) {
       this._headers.set('Authorization', 'Bearer ' + this._login.secret);
     }
-    this.http.get<ConfigData>(this.getHttpUrl('config'), {
+    this.http.get<ConfigData>(this.getHttpUrl('configs'), {
       headers: this._headers
-    }).subscribe((value: ConfigData | any) => this._config = value);
+    }).subscribe((value: ConfigData | any) => {
+      this._config = {} as ConfigData;
+      if (value['allow-lan']) {
+        this._config.allowLan = value['allow-lan'];
+      }
+      if (value['socks-port'] !== undefined) {
+        this._config.socksPort = value['socks-port'];
+      }
+      if (value['redir-port'] !== undefined) {
+        this._config.redirPort = value['redir-port'];
+      }
+      if (value['tproxy-port'] !== undefined) {
+        this._config.tproxyPort = value['tproxy-port'];
+      }
+      if (value['mixed-port'] !== undefined) {
+        this._config.mixedPort = value['mixed-port'];
+      }
+      if (value['bind-address']) {
+        this._config.bindAddress = value['bind-address'];
+      }
+      if (value['log-level']) {
+        this._config.logLevel = value['log-level'];
+      }
+      this._config.port = value.port;
+      this._config.mode = value.mode;
+      this._config.ipv6 = value.ipv6;
+    });
   }
 }

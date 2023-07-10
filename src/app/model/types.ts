@@ -1,13 +1,13 @@
 export interface ConfigData {
     port: number,
-    'socks-port': number,
-    'redir-port': number,
-    'tproxy-port': number,
-    'mixed-port': number,
-    'allow-lan': boolean,
-    'bind-address': string,
+    'socksPort': number,
+    'redirPort': number,
+    'tproxyPort': number,
+    'mixedPort': number,
+    'allowLan': boolean,
+    'bindAddress': string,
     mode: string,
-    'log-level': string,
+    'logLevel': string,
     ipv6: boolean
   }
 

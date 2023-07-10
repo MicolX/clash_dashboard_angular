@@ -12,7 +12,6 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 })
 export class ConfigComponent {
   config: ConfigData;
-  configForm: FormGroup;
   
   modes = ['direct', 'rule', 'global'];
   logLevel = ['debug', 'info', 'error'];
@@ -23,17 +22,17 @@ export class ConfigComponent {
     private _formBuilder: FormBuilder
     ) {
       this.config = {} as ConfigData;
-      this.configForm = {} as FormGroup;
   }
 
   ngOnInit(): void {
     this.config = this.base.config || {} as ConfigData;
-    this.configForm = this._formBuilder.group(this.config);
     console.log(this.config);
   }
 
   onSubmit(): void {
 
   }
+
+  
 }
 
