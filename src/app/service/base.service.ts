@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Version, ConfigData, LoginData, TITLE } from '../model/types'
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observer } from 'rxjs';
+import { Observer, BehaviorSubject, map } from 'rxjs';
 
 
 @Injectable({
@@ -11,6 +11,7 @@ import { Observer } from 'rxjs';
 provide login, url service
 */
 export class BaseService {
+  public configSubject: BehaviorSubject<ConfigData>;
   private _login: LoginData | undefined;
   private _version: Version | undefined;
   private _config: ConfigData | undefined;
@@ -20,6 +21,7 @@ export class BaseService {
   constructor(private http: HttpClient) {
     this._headers = new HttpHeaders();
     this._params = new HttpParams();
+    this.configSubject = new BehaviorSubject({} as ConfigData);
   }
 
   public get version(): Version | undefined {
@@ -84,34 +86,35 @@ export class BaseService {
     if (this._login?.secret) {
       this._headers.set('Authorization', 'Bearer ' + this._login.secret);
     }
-    this.http.get<ConfigData>(this.getHttpUrl('configs'), {
+    this.http.get<any>(this.getHttpUrl('configs'), {
       headers: this._headers
-    }).subscribe((value: ConfigData | any) => {
-      this._config = {} as ConfigData;
+    }).pipe(map(value => {
+      const newValue = {} as ConfigData;
       if (value['allow-lan']) {
-        this._config.allowLan = value['allow-lan'];
+        newValue.allowLan = value['allow-lan'];
       }
       if (value['socks-port'] !== undefined) {
-        this._config.socksPort = value['socks-port'];
+        newValue.socksPort = value['socks-port'];
       }
       if (value['redir-port'] !== undefined) {
-        this._config.redirPort = value['redir-port'];
+        newValue.redirPort = value['redir-port'];
       }
       if (value['tproxy-port'] !== undefined) {
-        this._config.tproxyPort = value['tproxy-port'];
+        newValue.tproxyPort = value['tproxy-port'];
       }
       if (value['mixed-port'] !== undefined) {
-        this._config.mixedPort = value['mixed-port'];
+        newValue.mixedPort = value['mixed-port'];
       }
       if (value['bind-address']) {
-        this._config.bindAddress = value['bind-address'];
+        newValue.bindAddress = value['bind-address'];
       }
       if (value['log-level']) {
-        this._config.logLevel = value['log-level'];
+        newValue.logLevel = value['log-level'];
       }
-      this._config.port = value.port;
-      this._config.mode = value.mode;
-      this._config.ipv6 = value.ipv6;
-    });
+      newValue.port = value.port;
+      newValue.mode = value.mode;
+      newValue.ipv6 = value.ipv6;
+      return newValue;
+    })).subscribe(this.configSubject);
   }
 }

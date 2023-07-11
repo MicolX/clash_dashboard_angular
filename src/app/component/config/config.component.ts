@@ -22,11 +22,11 @@ export class ConfigComponent {
     private _formBuilder: FormBuilder
     ) {
       this.config = {} as ConfigData;
+      this.base.configSubject.subscribe((value: ConfigData) => this.config = value);
   }
 
   ngOnInit(): void {
-    this.config = this.base.config || {} as ConfigData;
-    console.log(this.config);
+    
   }
 
   onSubmit(): void {
