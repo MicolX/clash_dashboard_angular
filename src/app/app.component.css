@@ -8,6 +8,12 @@
     align-items: center;
     justify-content: center;
 }
+.nav-container mat-toolbar {
+    bottom: 0;
+    /* margin: auto;
+    width: 100%; */
+    position: absolute;
+}
 .sidenav {
     user-select: none;
     width: 15%;

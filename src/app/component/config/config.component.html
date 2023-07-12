@@ -1,43 +1,66 @@
 <div>
     <h1>Configurations</h1>
+    <form>
+
+        <mat-form-field class="form-field">
+            <mat-label>Mode</mat-label>
+            <mat-select [(ngModel)]="config.mode" name="mode">
+                <mat-option *ngFor="let mode of modes" [value]="mode">
+                    {{mode}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <mat-label>Log Level</mat-label>
+            <mat-select [(ngModel)]="config.logLevel" name="logLevel">
+                <mat-option *ngFor="let level of logLevel" [value]="level">
+                    {{level}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <mat-label>Port</mat-label>
+            <input matNativeControl type="number" [(ngModel)]="config.port" name="port">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <mat-label>Socks Port</mat-label>
+            <input matNativeControl type="number" [(ngModel)]="config.socksPort" name="socksPort">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <mat-label>Redir Port</mat-label>
+            <input matNativeControl type="number" [(ngModel)]="config.redirPort" name="redirPort">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <mat-label>TProxy Port</mat-label>
+            <input matNativeControl type="number" [(ngModel)]="config.tproxyPort" name="tproxyPort">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <mat-label>Mixed Port</mat-label>
+            <input matNativeControl type="number" [(ngModel)]="config.mixedPort" name="mixedPort">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+            <mat-label>Bind Address</mat-label>
+            <input matNativeControl type="string" [(ngModel)]="config.bindAddress" name="bindAddress">
+        </mat-form-field>
+
+        <div class="form-field">
+            <mat-label>Allow LAN</mat-label>
+            <mat-slide-toggle [(ngModel)]="config.allowLan" name="allowLan"></mat-slide-toggle>
+        </div>
+        
+        <div class="form-field">
+            <mat-label>IPv6</mat-label>
+            <mat-slide-toggle [(ngModel)]="config.ipv6" name="ipv6"></mat-slide-toggle>
+        </div>
+        
+    </form>
     
-        <mat-label>Mode</mat-label>
-        <mat-select [(ngModel)]="config.mode">
-            <mat-option *ngFor="let mode of modes" [value]="mode">
-                {{mode}}
-            </mat-option>
-        </mat-select>
-
-        <mat-label>Port</mat-label>
-        <input matNativeControl type="number" [(ngModel)]="config.port">
-
-        <mat-label>Socks Port</mat-label>
-        <input matNativeControl type="number" [(ngModel)]="config.socksPort">
-
-        <mat-label>Redir Port</mat-label>
-        <input matNativeControl type="number" [(ngModel)]="config.redirPort">
-
-        <mat-label>TProxy Port</mat-label>
-        <input matNativeControl type="number" [(ngModel)]="config.tproxyPort">
-
-        <mat-label>Mixed Port</mat-label>
-        <input matNativeControl type="number" [(ngModel)]="config.mixedPort">
-
-        <mat-label>Allow LAN</mat-label>
-        <mat-slide-toggle matNativeControl [(ngModel)]="config.allowLan"></mat-slide-toggle>
-
-        <mat-label>Bind Address</mat-label>
-        <input matNativeControl type="string" [(ngModel)]="config.bindAddress">
-
-        <mat-label>Log Level</mat-label>
-        <mat-select matNativeControl [(ngModel)]="config.logLevel">
-            <mat-option *ngFor="let level of logLevel" [value]="level">
-                {{level}}
-            </mat-option>
-        </mat-select>
-
-        <mat-label>IPv6</mat-label>
-        <mat-slide-toggle matNativeControl [(ngModel)]="config.ipv6"></mat-slide-toggle>
-    
-    <button mat-raised-button color="primary" type="submit">Submit</button>
+    <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Submit</button>
 </div>

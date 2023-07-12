@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { webSocket } from 'rxjs/webSocket';
+import { WebSocketSubject, webSocket } from 'rxjs/webSocket';
 import { BaseService } from 'src/app/service/base.service';
 
 interface LogData {
@@ -14,18 +14,23 @@ interface LogData {
 })
 export class LogMonitorComponent {
   logs: LogData[];
+  private socket: WebSocketSubject<any>;
 
   constructor(private base: BaseService) {
     this.logs = new Array();
-    let params = base.params;
-    if (base.config && base.config.logLevel) {
-      params = params.append('level', base.config.logLevel);
+    let params = this.base.params;
+    if (this.base.config && this.base.config.logLevel) {
+      params = params.append('level', this.base.config.logLevel);
     }
-    const url = params ? `${base.getWsUrl('logs')}?${params?.toString()}` : base.getWsUrl('logs');
-    webSocket(url).subscribe({
+    const url = params ? `${this.base.getWsUrl('logs')}?${params?.toString()}` : this.base.getWsUrl('logs');
+    this.socket = webSocket(url);
+  }
+
+  ngOnInit(): void {
+    this.socket.subscribe({
       next: msg => this.logs.push(msg as LogData),
       error: err => console.log(err),
-      complete: () => {}
+      complete: () => {console.log('log websocket disconnected')}
     });
   }
 }

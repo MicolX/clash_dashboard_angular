@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Version, ConfigData, LoginData, TITLE } from '../model/types'
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observer, BehaviorSubject, map } from 'rxjs';
+import { Observer, Subject, map } from 'rxjs';
 
 
 @Injectable({
@@ -11,7 +11,7 @@ import { Observer, BehaviorSubject, map } from 'rxjs';
 provide login, url service
 */
 export class BaseService {
-  public configSubject: BehaviorSubject<ConfigData>;
+  public configSubject: Subject<ConfigData>;
   private _login: LoginData | undefined;
   private _version: Version | undefined;
   private _config: ConfigData | undefined;
@@ -21,7 +21,8 @@ export class BaseService {
   constructor(private http: HttpClient) {
     this._headers = new HttpHeaders();
     this._params = new HttpParams();
-    this.configSubject = new BehaviorSubject({} as ConfigData);
+    this.configSubject = new Subject();
+    this.configSubject.subscribe(value => this._config = value);
   }
 
   public get version(): Version | undefined {
@@ -66,7 +67,7 @@ export class BaseService {
   public handleLoginNext(version: Version) {
     this._version = version;
     if (this._login?.secret) {
-      this._params = this._params.set('secret', encodeURIComponent(this._login?.secret));
+      this._params = this._params.set('token', encodeURIComponent(this._login?.secret));
     }
   }
 

@@ -6,10 +6,10 @@
     <mat-nav-list>
       <app-nav-item *ngFor="let route of routes" [title]="route.data?.['title']" [icon]="route.data?.['icon']" [path]="route.path"></app-nav-item>
     </mat-nav-list>
-	<footer *ngIf="version">
-		<p *ngIf="version.premium">Premium🌟</p>
-		<p>{{version.version}}</p>
-	</footer>
+	<mat-toolbar *ngIf="version" color="primary">
+		<mat-toolbar-row *ngIf="version.premium"><span>Premium🌟</span></mat-toolbar-row>
+		<mat-toolbar-row *ngIf="version.version"><span>{{version.version}}</span></mat-toolbar-row>
+	</mat-toolbar>
   </mat-sidenav>
 	<mat-sidenav-content class="sidenav-content">
 		<router-outlet></router-outlet>
