@@ -24,6 +24,8 @@ import { ConfigComponent } from './component/config/config.component';
 import { BaseService } from './service/base.service';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ConfigService } from './service/config.service';
+import { LogMonitorService } from './service/log-monitor.service';
 
 export const routes: Routes = [
   {path: 'proxies', component: ProxyComponent, data: { title: 'Proxies', icon: 'local_parking'}},
@@ -63,7 +65,7 @@ export const routes: Routes = [
     MatSelectModule,
     MatSlideToggleModule
   ],
-  providers: [BaseService],
+  providers: [BaseService, ConfigService, LogMonitorService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

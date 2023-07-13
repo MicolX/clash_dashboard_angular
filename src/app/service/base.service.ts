@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Version, ConfigData, LoginData, TITLE } from '../model/types'
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observer, Subject, map } from 'rxjs';
+import { BehaviorSubject, Observer, Subject, map } from 'rxjs';
 
 
 @Injectable({
@@ -11,26 +11,18 @@ import { Observer, Subject, map } from 'rxjs';
 provide login, url service
 */
 export class BaseService {
-  public configSubject: Subject<ConfigData>;
   private _login: LoginData | undefined;
   private _version: Version | undefined;
-  private _config: ConfigData | undefined;
   private _headers: HttpHeaders;
   private _params: HttpParams;
 
   constructor(private http: HttpClient) {
     this._headers = new HttpHeaders();
     this._params = new HttpParams();
-    this.configSubject = new Subject();
-    this.configSubject.subscribe(value => this._config = value);
   }
 
   public get version(): Version | undefined {
     return this._version;
-  }
-  
-  public get config(): ConfigData | undefined {
-    return this._config;
   }
   
   public get login(): LoginData | undefined {
@@ -57,11 +49,9 @@ export class BaseService {
     return `ws://${this._login?.address}:${this._login?.port}/${endPoint}`;
   }
 
-  public startLogin(observer: Observer<Version>) {
-    if (this._login?.secret) {
-      this._headers = this._headers.set('Authorization', 'Bearer ' + this._login.secret);
-    }
-    this.http.get<Version>(this.getHttpUrl('version'), {headers: this._headers}).subscribe(observer);
+  public startLogin() {
+    this._headers = this._login?.secret ? this._headers.set('Authorization', 'Bearer ' + this._login.secret) : new HttpHeaders();
+    return this.http.get<Version>(this.getHttpUrl('version'), {headers: this._headers});
   }
 
   public handleLoginNext(version: Version) {
@@ -81,41 +71,5 @@ export class BaseService {
 				localStorage.removeItem(TITLE);
 			}
 		}
-  }
-
-  public getConfig() {
-    if (this._login?.secret) {
-      this._headers.set('Authorization', 'Bearer ' + this._login.secret);
-    }
-    this.http.get<any>(this.getHttpUrl('configs'), {
-      headers: this._headers
-    }).pipe(map(value => {
-      const newValue = {} as ConfigData;
-      if (value['allow-lan']) {
-        newValue.allowLan = value['allow-lan'];
-      }
-      if (value['socks-port'] !== undefined) {
-        newValue.socksPort = value['socks-port'];
-      }
-      if (value['redir-port'] !== undefined) {
-        newValue.redirPort = value['redir-port'];
-      }
-      if (value['tproxy-port'] !== undefined) {
-        newValue.tproxyPort = value['tproxy-port'];
-      }
-      if (value['mixed-port'] !== undefined) {
-        newValue.mixedPort = value['mixed-port'];
-      }
-      if (value['bind-address']) {
-        newValue.bindAddress = value['bind-address'];
-      }
-      if (value['log-level']) {
-        newValue.logLevel = value['log-level'];
-      }
-      newValue.port = value.port;
-      newValue.mode = value.mode;
-      newValue.ipv6 = value.ipv6;
-      return newValue;
-    })).subscribe(this.configSubject);
   }
 }

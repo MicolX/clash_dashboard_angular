@@ -5,6 +5,8 @@ import { routes } from './app.module';
 import { BaseService } from './service/base.service';
 import { Observer } from 'rxjs';
 import { Version } from './model/types';
+import { __values } from 'tslib';
+import { ConfigService } from './service/config.service';
 
 
 @Component({
@@ -18,33 +20,34 @@ export class AppComponent {
 
 	constructor(
 		private dialog: MatDialog, 
-		private baseService: BaseService
+		private baseService: BaseService,
+		private configService: ConfigService
 		) {
 	}
 
 	ngOnInit(): void {
 		this.baseService.loadLocalStorage();
 		if (!this.baseService.login) {
-			this.popupLogin().afterClosed().subscribe((value: Version) => {
-				this.version = this.baseService.version; 
-				this.baseService.getConfig();
+			this.popupLogin().afterClosed().subscribe(() => {
+				this.version = this.baseService.version;
+				this.configService.getConfig()
 			});
 		} else {
-			const observer: Observer<Version> = {
-				next: (value: Version) => {
+			this.baseService.startLogin().subscribe({
+				next: (value) => {
 					this.baseService.handleLoginNext(value);
+					this.version = value;
 				},
-				error: (e) => {
-					this.popupLogin().afterClosed().subscribe((value: Version) => {
-						this.version = this.baseService.version; 
+				error: () => {
+					this.popupLogin().afterClosed().subscribe(() => {
+						this.version = this.baseService.version;
+						this.configService.getConfig()
 					});
 				},
 				complete: () => {
-					this.version = this.baseService.version;
-					this.baseService.getConfig();
+					this.configService.getConfig();
 				}
-			}
-			this.baseService.startLogin(observer);
+			});
 		}
 	}
 

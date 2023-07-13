@@ -24,12 +24,8 @@ export class LogInDialogComponent {
 	}
 
 	onClick():void {
-		this.base.login = {
-			address: this.data.address,
-			port: this.data.port,
-			secret: this.data.secret
-		}
-		this.base.startLogin({
+		this.base.login = {...this.data};
+		this.base.startLogin().subscribe({
 			next: (value: Version) => {
 				this.base.handleLoginNext(value);
 			},
@@ -38,7 +34,6 @@ export class LogInDialogComponent {
 			},
 			complete: () => {
 				localStorage.setItem(TITLE, JSON.stringify(this.data));
-				this.base.getConfig();
 				this.dialogRef.close();
 			}
 		});
