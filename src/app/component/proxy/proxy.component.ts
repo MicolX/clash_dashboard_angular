@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
-
-interface Proxy {
-  name: string,
-  delay: string
-}
+import { Proxy } from 'src/app/model/types';
+import { ProxyService } from 'src/app/service/proxy.service';
 
 @Component({
   selector: 'app-proxy',
@@ -11,5 +8,8 @@ interface Proxy {
   styleUrls: ['./proxy.component.css']
 })
 export class ProxyComponent {
-
+  proxies: [Proxy] | undefined;
+  constructor(private proxyService: ProxyService) {
+    proxyService.getProxies().subscribe(value => this.proxies = value);
+  }
 }

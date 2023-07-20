@@ -27,4 +27,10 @@ export interface LogData {
   payload: string
 }
 
+export interface Proxy {
+  name: string,
+  type: string,
+  udp: boolean
+}
+
 export const TITLE = 'clash-dashboard-angular';

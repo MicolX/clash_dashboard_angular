@@ -1,6 +1,12 @@
-<mat-card>
-    <mat-card-header>
-        <mat-card-title>Proxy</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>content</mat-card-content>
-</mat-card>
+<div class="proxy-background">
+    <h1>Proxy</h1>
+    <div class="md-padding" layout="row" layout-wrap>
+        <mat-card class="proxy-card" *ngFor="let item of proxies">
+            <mat-card-header>
+                <mat-card-title>{{item.name}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>{{item.type}}</mat-card-content>
+        </mat-card>
+    </div>
+</div>
+
