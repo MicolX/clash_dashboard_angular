@@ -1,5 +1,5 @@
-import { Component, Inject, inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { Component } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog'
 import { LoginData, TITLE, Version } from '../../model/types';
 import { BaseService } from 'src/app/service/base.service';
 import { HttpErrorResponse } from '@angular/common/http';

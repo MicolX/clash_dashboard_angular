@@ -15,11 +15,10 @@ export class ConfigComponent {
 
   constructor(private configService: ConfigService) {
       this.config = {} as ConfigData;
-      configService.configSubject.subscribe(value => this.config = value);
   }
 
   ngOnInit(): void {
-    this.config = this.configService.config;
+    this.configService.getConfig().subscribe(value => this.config = value);
   }
 
   onSubmit(): void {

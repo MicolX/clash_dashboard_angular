@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Version, ConfigData, LoginData, TITLE } from '../model/types'
+import { Version, LoginData, TITLE } from '../model/types'
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, Observer, Subject, map } from 'rxjs';
 
 
 @Injectable({

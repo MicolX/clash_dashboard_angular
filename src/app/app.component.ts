@@ -1,9 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LogInDialogComponent } from './component/log-in-dialog/log-in-dialog.component';
 import { routes } from './app.module';
 import { BaseService } from './service/base.service';
-import { Observer } from 'rxjs';
 import { Version } from './model/types';
 import { __values } from 'tslib';
 import { ConfigService } from './service/config.service';
@@ -30,7 +29,7 @@ export class AppComponent {
 		if (!this.baseService.login) {
 			this.popupLogin().afterClosed().subscribe(() => {
 				this.version = this.baseService.version;
-				this.configService.getConfig()
+				
 			});
 		} else {
 			this.baseService.startLogin().subscribe({
@@ -41,11 +40,7 @@ export class AppComponent {
 				error: () => {
 					this.popupLogin().afterClosed().subscribe(() => {
 						this.version = this.baseService.version;
-						this.configService.getConfig()
 					});
-				},
-				complete: () => {
-					this.configService.getConfig();
 				}
 			});
 		}
