@@ -1,13 +1,13 @@
 export interface ConfigData {
     port: number,
-    'socksPort': number,
-    'redirPort': number,
-    'tproxyPort': number,
-    'mixedPort': number,
-    'allowLan': boolean,
-    'bindAddress': string,
+    socksPort: number,
+    redirPort: number,
+    tproxyPort: number,
+    mixedPort: number,
+    allowLan: boolean,
+    bindAddress: string,
     mode: string,
-    'logLevel': string,
+    logLevel: string,
     ipv6: boolean
   }
 
@@ -30,7 +30,21 @@ export interface LogData {
 export interface Proxy {
   name: string,
   type: string,
-  udp: boolean
+  udp: boolean,
+  history: History
+}
+
+export interface Provider {
+  name: string,
+  proxies: [Proxy],
+  type: string,
+  updatedAt: string,
+  vehicleType: string
+}
+
+export interface History {
+  time: string,
+  delay: number
 }
 
 export const TITLE = 'clash-dashboard-angular';

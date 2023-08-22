@@ -11,6 +11,6 @@ export class ProxyService {
   constructor(private base: BaseService, private http: HttpClient) {  }
 
   getProxies() {
-    return this.http.get<[Proxy]>(this.base.getHttpUrl('/proxy'));
+    return this.http.get<[Proxy]>(this.base.getHttpUrl('providers/proxies'), {headers: this.base.headers});
   }
 }
