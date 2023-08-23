@@ -31,15 +31,17 @@ export interface Proxy {
   name: string,
   type: string,
   udp: boolean,
-  history: History
+  history: [History]
 }
 
 export interface Provider {
-  name: string,
-  proxies: [Proxy],
-  type: string,
-  updatedAt: string,
-  vehicleType: string
+    [name: string]: {
+      name: string,
+      proxies: [Proxy],
+      type: string,
+      updatedAt: string,
+      vehicleType: string
+    }
 }
 
 export interface History {

@@ -1,3 +1,5 @@
 .proxy-card {
     float: left;
+    border-width: 5px;
+    padding: 5px;
 }
