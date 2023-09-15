@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Proxy, Provider } from 'src/app/model/types';
+import { Proxy } from 'src/app/model/types';
 import { ProxyService } from 'src/app/service/proxy.service';
 
 @Component({
@@ -8,12 +8,24 @@ import { ProxyService } from 'src/app/service/proxy.service';
     styleUrls: ['./proxy.component.css']
 })
 export class ProxyComponent {
-    proxies: [Proxy] | undefined;
+    proxies: { [name: string] : [Proxy & {chosen: boolean}]};
     constructor(private proxyService: ProxyService) {
-        proxyService.getProxies().subscribe(value => {
+        this.proxies = {};
+        let chosen = '';
+        proxyService.getProviderProxies().subscribe(value => {
+            value['default'].proxies.forEach((element : Proxy) => {
+                if (element.now) {
+                    chosen = element.now;
+                }
+            });
             for (let name of Object.keys(value)) {
-                if (name !== 'default') {
-                    this.proxies = value[name].proxies;
+                if (name != 'default') {
+                    this.proxies[name] = value[name].proxies;
+                }
+            }
+            for (let value of Object.values(this.proxies)) {
+                for (let proxy of value) {
+                    proxy.chosen = proxy.name == chosen;
                 }
             }
         });

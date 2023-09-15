@@ -31,7 +31,9 @@ export interface Proxy {
   name: string,
   type: string,
   udp: boolean,
-  history: [History]
+  history: [History],
+  all?: [string],
+  now?: string
 }
 
 export interface Provider {
@@ -45,7 +47,7 @@ export interface Provider {
 }
 
 export interface History {
-  time: string,
+  time: Date,
   delay: number
 }
 
