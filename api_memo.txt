@@ -1,0 +1,515 @@
+GET /logs
+{
+    "type": "info",
+    "payload": "[TCP] 1.2.3.122:54409 --\u003e optimizationguide-pa.googleapis.com:443 match RuleSet(gfw) using PROXY[US.美国.E | 专线.IPLC]"
+}
+
+GET /traffic
+{
+    "up": 0,
+    "down": 0
+}
+
+GET /version
+{
+    "premium": true,
+    "version": "2022.01.03"
+}
+
+GET /configs
+{
+    "port": 0,
+    "socks-port": 0,
+    "redir-port": 8888,
+    "tproxy-port": 0,
+    "mixed-port": 7890,
+    "authentication": [],
+    "allow-lan": true,
+    "bind-address": "*",
+    "mode": "rule",
+    "log-level": "info",
+    "ipv6": false
+}
+
+PUT /configs
+
+
+PATCH /configs
+
+
+GET /proxies
+{
+    "proxies": {
+        "DIRECT": {
+            "history": [],
+            "name": "DIRECT",
+            "type": "Direct",
+            "udp": true
+        },
+        "GLOBAL": {
+            "all": [
+                "DIRECT",
+                "REJECT",
+                "PROXY"
+            ],
+            "history": [],
+            "name": "GLOBAL",
+            "now": "DIRECT",
+            "type": "Selector",
+            "udp": true
+        },
+        "PROXY": {
+            "all": [
+                "JP.东京.A | 中转",
+                "JP.东京.B | 中转",
+                "JP.东京.C | 中转",
+                "JP.东京.D | 中转",
+                "JP.东京.E | 中转",
+                "JP.东京.F | 中转",
+                "JP.东京.G | 中转",
+                "HK.香港.A | 中转",
+                "HK.香港.B | 中转",
+                "HK.香港.C | 中转",
+                "HK.香港.D | 中转",
+                "HK.香港.F | 中转",
+                "HK.香港.G | 中转",
+                "HK.香港.H | 中转",
+                "HK.香港.I | 中转",
+                "JP.日本.A | 中转",
+                "JP.日本.B | 中转",
+                "JP.日本.C | 中转",
+                "KR.韩国.A | 中转",
+                "KR.韩国.B | 中转",
+                "KR.韩国.C | 中转",
+                "SG.新加坡.A | 中转",
+                "SG.新加坡.B | 中转",
+                "IN.印度.A | 中转",
+                "US.美国.A | 中转",
+                "US.美国.B | 中转",
+                "US.美国.C | 专线.IPLC",
+                "US.美国.D | 专线.IPLC",
+                "US.美国.E | 专线.IPLC",
+                "US.美国.F | 中转",
+                "US.美国.G | 中转",
+                "DE.德国.A | 中转",
+                "DE.德国.B | 中转",
+                "UK.英国.A | 中转",
+                "UK.英国.B | 中转",
+                "AU.澳洲.A | 中转",
+                "BR.巴西.A | 中转",
+                "CL.智利.A | 中转",
+                "FR.法国.A | 中转",
+                "NO.挪威.A | 中转",
+                "SA.沙特.A | 中转",
+                "CA.加拿大.A | 中转",
+                "TR.土耳其.A | 中转",
+                "[0.5].US.官网：https://1.cutecloud.net",
+                "[0.5].US.人工客服7x12小时在线~",
+                "[0.1].IN.导航：https://new.cutecloud.link/link",
+                "[0.5].US.请注意节点倍率~",
+                "[0.5].BR.代理/合作/定制，请联系群组客服~",
+                "[0.5].BR.欢迎使用 最萌の云 ~",
+                "[0.5].IN.倍率.标准x0.1~1|中转x1.5|专线x3",
+                "[0.5].US.若体验差，请尝试高级别节点~",
+                "[1.0].KR.Welcome to CuteCloud ~",
+                "[1.0].KR.群组：https://t.me/urebest"
+            ],
+            "history": [],
+            "name": "PROXY",
+            "now": "US.美国.E | 专线.IPLC",
+            "type": "URLTest",
+            "udp": true
+        },
+        "REJECT": {
+            "history": [],
+            "name": "REJECT",
+            "type": "Reject",
+            "udp": true
+        }
+    }
+}
+
+
+GET /proxies/:name
+for example:
+GET /proxies/PROXY
+{
+    "all": [
+        "JP.东京.A | 中转",
+        "JP.东京.B | 中转",
+        "JP.东京.C | 中转",
+        "JP.东京.D | 中转",
+        "JP.东京.E | 中转",
+        "JP.东京.F | 中转",
+        "JP.东京.G | 中转",
+        "HK.香港.A | 中转",
+        "HK.香港.B | 中转",
+        "HK.香港.C | 中转",
+        "HK.香港.D | 中转",
+        "HK.香港.F | 中转",
+        "HK.香港.G | 中转",
+        "HK.香港.H | 中转",
+        "HK.香港.I | 中转",
+        "JP.日本.A | 中转",
+        "JP.日本.B | 中转",
+        "JP.日本.C | 中转",
+        "KR.韩国.A | 中转",
+        "KR.韩国.B | 中转",
+        "KR.韩国.C | 中转",
+        "SG.新加坡.A | 中转",
+        "SG.新加坡.B | 中转",
+        "IN.印度.A | 中转",
+        "US.美国.A | 中转",
+        "US.美国.B | 中转",
+        "US.美国.C | 专线.IPLC",
+        "US.美国.D | 专线.IPLC",
+        "US.美国.E | 专线.IPLC",
+        "US.美国.F | 中转",
+        "US.美国.G | 中转",
+        "DE.德国.A | 中转",
+        "DE.德国.B | 中转",
+        "UK.英国.A | 中转",
+        "UK.英国.B | 中转",
+        "AU.澳洲.A | 中转",
+        "BR.巴西.A | 中转",
+        "CL.智利.A | 中转",
+        "FR.法国.A | 中转",
+        "NO.挪威.A | 中转",
+        "SA.沙特.A | 中转",
+        "CA.加拿大.A | 中转",
+        "TR.土耳其.A | 中转",
+        "[0.5].US.官网：https://1.cutecloud.net",
+        "[0.5].US.人工客服7x12小时在线~",
+        "[0.1].IN.导航：https://new.cutecloud.link/link",
+        "[0.5].US.请注意节点倍率~",
+        "[0.5].BR.代理/合作/定制，请联系群组客服~",
+        "[0.5].BR.欢迎使用 最萌の云 ~",
+        "[0.5].IN.倍率.标准x0.1~1|中转x1.5|专线x3",
+        "[0.5].US.若体验差，请尝试高级别节点~",
+        "[1.0].KR.Welcome to CuteCloud ~",
+        "[1.0].KR.群组：https://t.me/urebest"
+    ],
+    "history": [],
+    "name": "PROXY",
+    "now": "US.美国.E | 专线.IPLC",
+    "type": "URLTest",
+    "udp": true
+}
+
+
+GET /proxies/:name/delay
+
+
+GET /rules
+{
+    "rules": [
+        {
+            "type": "RuleSet",
+            "payload": "my_proxy",
+            "proxy": "PROXY"
+        },
+        {
+            "type": "RuleSet",
+            "payload": "applications",
+            "proxy": "DIRECT"
+        },
+        {
+            "type": "Domain",
+            "payload": "clash.razord.top",
+            "proxy": "DIRECT"
+        },
+        {
+            "type": "Domain",
+            "payload": "yacd.haishan.me",
+            "proxy": "DIRECT"
+        },
+        {
+            "type": "RuleSet",
+            "payload": "private",
+            "proxy": "DIRECT"
+        },
+        {
+            "type": "RuleSet",
+            "payload": "reject",
+            "proxy": "REJECT"
+        },
+        {
+            "type": "RuleSet",
+            "payload": "tld-not-cn",
+            "proxy": "PROXY"
+        },
+        {
+            "type": "RuleSet",
+            "payload": "gfw",
+            "proxy": "PROXY"
+        },
+        {
+            "type": "RuleSet",
+            "payload": "greatfire",
+            "proxy": "PROXY"
+        },
+        {
+            "type": "RuleSet",
+            "payload": "telegramcidr",
+            "proxy": "PROXY"
+        },
+        {
+            "type": "Match",
+            "payload": "",
+            "proxy": "DIRECT"
+        }
+    ]
+}
+
+GET /connections
+{
+    "downloadTotal": 79216581406,
+    "uploadTotal": 1697732883,
+    "connections": [
+        {
+            "id": "91ce4866-ff52-4769-83a2-f3169b903f4e",
+            "metadata": {
+                "network": "tcp",
+                "type": "HTTP",
+                "sourceIP": "1.2.3.233",
+                "destinationIP": "47.246.20.232",
+                "sourcePort": "51257",
+                "destinationPort": "80",
+                "host": "store.is.autonavi.com",
+                "dnsMode": "normal"
+            },
+            "upload": 259,
+            "download": 6377,
+            "start": "2023-06-22T03:38:21.25773232Z",
+            "chains": [
+                "DIRECT"
+            ],
+            "rule": "Match",
+            "rulePayload": ""
+        },
+        {
+            "id": "5d506fc3-5589-4d80-abee-6ad16265f750",
+            "metadata": {
+                "network": "tcp",
+                "type": "HTTP",
+                "sourceIP": "1.2.3.233",
+                "destinationIP": "8.48.85.2",
+                "sourcePort": "51842",
+                "destinationPort": "80",
+                "host": "f.video.weibocdn.com",
+                "dnsMode": "normal"
+            },
+            "upload": 441,
+            "download": 1063,
+            "start": "2023-06-22T05:00:16.60317504Z",
+            "chains": [
+                "DIRECT"
+            ],
+            "rule": "Match",
+            "rulePayload": ""
+        },
+        {
+            "id": "6d6672c1-4abd-4485-a513-3cff110fd492",
+            "metadata": {
+                "network": "tcp",
+                "type": "HTTP",
+                "sourceIP": "1.2.3.148",
+                "destinationIP": "184.25.56.122",
+                "sourcePort": "53158",
+                "destinationPort": "80",
+                "host": "is3.mzstatic.com",
+                "dnsMode": "normal"
+            },
+            "upload": 218,
+            "download": 5760,
+            "start": "2023-06-05T09:16:18.232821264Z",
+            "chains": [
+                "DIRECT"
+            ],
+            "rule": "Match",
+            "rulePayload": ""
+        },
+        {
+            "id": "cfab044c-889e-4d00-a25b-e0f559ebc71d",
+            "metadata": {
+                "network": "tcp",
+                "type": "HTTP",
+                "sourceIP": "1.2.3.233",
+                "destinationIP": "47.246.20.234",
+                "sourcePort": "56900",
+                "destinationPort": "80",
+                "host": "store.is.autonavi.com",
+                "dnsMode": "normal"
+            },
+            "upload": 256,
+            "download": 4474,
+            "start": "2023-05-27T13:17:59.399118749Z",
+            "chains": [
+                "DIRECT"
+            ],
+            "rule": "Match",
+            "rulePayload": ""
+        },
+        {
+            "id": "06f6e586-31c5-4c27-bca2-f1f9f39a3ec7",
+            "metadata": {
+                "network": "tcp",
+                "type": "HTTP Connect",
+                "sourceIP": "1.2.3.148",
+                "destinationIP": "1.2.3.146",
+                "sourcePort": "63185",
+                "destinationPort": "49498",
+                "host": "",
+                "dnsMode": "normal"
+            },
+            "upload": 1327,
+            "download": 977,
+            "start": "2023-06-27T15:25:04.602359732Z",
+            "chains": [
+                "DIRECT"
+            ],
+            "rule": "Match",
+            "rulePayload": ""
+        }
+    ]
+}
+
+GET /providers/proxies
+{
+    "providers": {
+        "default": {
+            "name": "default",
+            "proxies": [
+                {
+                    "history": [],
+                    "name": "DIRECT",
+                    "type": "Direct",
+                    "udp": true
+                },
+                {
+                    "history": [],
+                    "name": "REJECT",
+                    "type": "Reject",
+                    "udp": true
+                },
+                {
+                    "all": [
+                        "JP.东京.A | 中转",
+                        "JP.东京.B | 中转",
+                        "JP.东京.C | 中转",
+                        "JP.东京.D | 中转",
+                        "JP.东京.E | 中转",
+                        "JP.东京.F | 中转",
+                        "JP.东京.G | 中转",
+                        "HK.香港.A | 中转",
+                        "HK.香港.B | 中转",
+                        "HK.香港.C | 中转",
+                        "HK.香港.D | 中转",
+                        "HK.香港.F | 中转",
+                        "HK.香港.G | 中转",
+                        "HK.香港.H | 中转",
+                        "HK.香港.I | 中转",
+                        "JP.日本.A | 中转",
+                        "JP.日本.B | 中转",
+                        "JP.日本.C | 中转",
+                        "KR.韩国.A | 中转",
+                        "KR.韩国.B | 中转",
+                        "KR.韩国.C | 中转",
+                        "SG.新加坡.A | 中转",
+                        "SG.新加坡.B | 中转",
+                        "IN.印度.A | 中转",
+                        "US.美国.A | 中转",
+                        "US.美国.B | 中转",
+                        "US.美国.C | 专线.IPLC",
+                        "US.美国.D | 专线.IPLC",
+                        "US.美国.E | 专线.IPLC",
+                        "US.美国.F | 中转",
+                        "US.美国.G | 中转",
+                        "DE.德国.A | 中转",
+                        "DE.德国.B | 中转",
+                        "UK.英国.A | 中转",
+                        "UK.英国.B | 中转",
+                        "AU.澳洲.A | 中转",
+                        "BR.巴西.A | 中转",
+                        "CL.智利.A | 中转",
+                        "FR.法国.A | 中转",
+                        "NO.挪威.A | 中转",
+                        "SA.沙特.A | 中转",
+                        "CA.加拿大.A | 中转",
+                        "TR.土耳其.A | 中转",
+                        "[0.5].US.官网：https://1.cutecloud.net",
+                        "[0.5].US.人工客服7x12小时在线~",
+                        "[0.1].IN.导航：https://new.cutecloud.link/link",
+                        "[0.5].US.请注意节点倍率~",
+                        "[0.5].BR.代理/合作/定制，请联系群组客服~",
+                        "[0.5].BR.欢迎使用 最萌の云 ~",
+                        "[0.5].IN.倍率.标准x0.1~1|中转x1.5|专线x3",
+                        "[0.5].US.若体验差，请尝试高级别节点~",
+                        "[1.0].KR.Welcome to CuteCloud ~",
+                        "[1.0].KR.群组：https://t.me/urebest"
+                    ],
+                    "history": [],
+                    "name": "PROXY",
+                    "now": "US.美国.E | 专线.IPLC",
+                    "type": "URLTest",
+                    "udp": true
+                }
+            ],
+            "type": "Proxy",
+            "vehicleType": "Compatible"
+        },
+        "ure": {
+            "name": "ure",
+            "proxies": [
+                {
+                    "history": [
+                        {
+                            "time": "2023-06-27T14:25:55.155905574Z",
+                            "delay": 234
+                        }
+                    ],
+                    "name": "JP.东京.A | 中转",
+                    "type": "Trojan",
+                    "udp": true
+                },
+                {
+                    "history": [
+                        {
+                            "time": "2023-06-27T14:25:55.157338959Z",
+                            "delay": 235
+                        }
+                    ],
+                    "name": "JP.东京.B | 中转",
+                    "type": "Trojan",
+                    "udp": true
+                },
+                {
+                    "history": [
+                        {
+                            "time": "2023-06-27T14:25:55.171087083Z",
+                            "delay": 249
+                        }
+                    ],
+                    "name": "JP.东京.C | 中转",
+                    "type": "Trojan",
+                    "udp": true
+                }
+            ],
+            "type": "Proxy",
+            "updatedAt": "2023-06-27T14:25:54.886113874Z",
+            "vehicleType": "HTTP"
+        }
+    }
+}
+
+GET /providers/proxies/:name
+
+
+GET /providers/proxies/:name/healthcheck
+
+
+GET /dns/query?name={name}[&type={type}]
+Parameters:
+
+name (required): The domain name to query.
+type (optional): The DNS record type to query (e.g., A, MX, CNAME, etc.). Defaults to A if not provided.

@@ -1,0 +1,29 @@
+.nav-container {
+    height: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
+.sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.nav-container mat-toolbar {
+    bottom: 0;
+    /* margin: auto;
+    width: 100%; */
+    position: absolute;
+}
+.sidenav {
+    user-select: none;
+    width: 15%;
+}
+.icon-title {
+    width: 100%;
+}
+.list-icon {
+    margin-right: 10px;
+}
+.list-item {
+    width: 100%;
+}

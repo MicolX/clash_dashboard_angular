@@ -1,0 +1,9 @@
+.proxy-card {
+    float: left;
+    border-width: 5px;
+    margin: 5px;
+}
+
+.chosen-card {
+    background-color: lawngreen;
+}

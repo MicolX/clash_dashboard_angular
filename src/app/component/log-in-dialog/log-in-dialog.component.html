@@ -1,0 +1,28 @@
+<div mat-dialog-content>
+    <mat-card-header>
+        <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    
+    <mat-card-content>
+        <form>
+            <mat-form-field class="login-input-field">
+                <mat-label>IP</mat-label>
+                <input matNativeControl type="string" placeholder="127.0.0.1" [(ngModel)]="data.address" name="ip">
+            </mat-form-field>
+            <mat-form-field class="login-input-field">
+                <mat-label>Port</mat-label>
+                <input matNativeControl type="number" placeholder="7890" [(ngModel)]="data.port" name="port">
+            </mat-form-field>
+            <mat-form-field class="login-input-field">
+                <mat-label>Password</mat-label>
+                <input matNativeControl type="password" placeholder="****" [(ngModel)]="data.secret" name="secret">
+            </mat-form-field>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="onClick()">Login</button>
+    </mat-card-actions>
+    <div *ngIf="error">
+        <span>{{error}}</span>
+    </div>
+</div>
