@@ -34,6 +34,8 @@ export interface Proxy {
   history: [History],
   all?: [string],
   now?: string
+  chosen?: boolean,
+  provider?: string
 }
 
 export interface Provider {

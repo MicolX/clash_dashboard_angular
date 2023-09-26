@@ -1,13 +1,30 @@
 <div class="proxy-background">
     <h1>Proxy</h1>
-    <div class="md-padding" layout="row" layout-wrap *ngFor="let item of proxies | keyvalue">
-        <h2>{{item.key}}</h2>
-        <mat-card class="proxy-card" [class.chosen-card]="proxy.chosen" *ngFor="let proxy of item.value">
+    <div class="proxy-filter">
+        <h3>Filter: </h3>
+        <mat-form-field appearance="fill">
+            <mat-label>Provider</mat-label>
+            <mat-select [(value)]="providerSelected" placeholder="providerSelected" (selectionChange)="providerFilterChanged()">
+                <mat-option *ngFor="let provider of providerFilter" value="{{provider}}">{{provider}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Protocol</mat-label>
+            <mat-select [(value)]="protocolSelected" placeholder="protocolSelected" (selectionChange)="protocolFilterChanged()">
+                <mat-option *ngFor="let protocol of protocolFilter" value="{{protocol}}">{{protocol}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button mat-mini-fab color="warn" aria-label="Clear Filter" (click)="clearFilter()">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </div>
+    <div class="proxy-content-div">
+        <mat-card class="proxy-card" [class.chosen-card]="proxy.chosen" *ngFor="let proxy of proxiesFiltered">
             <mat-card-header>
                 <mat-card-title>{{proxy.name}}</mat-card-title>
-                <mat-card-subtitle>{{proxy.type}}</mat-card-subtitle>
+                <mat-card-subtitle>{{proxy.type}} | {{proxy.provider}}</mat-card-subtitle>
             </mat-card-header>
-            <mat-card-content *ngIf="proxy.history.length> 0">{{proxy.history[0].delay}}</mat-card-content>
+            <mat-card-content *ngIf="proxy.history.length > 0">{{proxy.history[0].delay}}</mat-card-content>
             <mat-card-footer *ngIf="proxy.history.length > 0">{{proxy.history[0].time | date:'M/d/yyyy, h:mm a' }}</mat-card-footer>
         </mat-card>
     </div>

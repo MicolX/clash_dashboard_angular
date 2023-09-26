@@ -1,9 +1,25 @@
 .proxy-card {
-    float: left;
     border-width: 5px;
     margin: 5px;
+    width: 200px;
 }
 
 .chosen-card {
-    background-color: lawngreen;
+    background-color: rgb(124, 252, 0);
+}
+
+.proxy-content-div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.proxy-filter {
+    display: flex;
+    flex-direction: row;
+}
+
+.proxy-filter-content {
+    display: flex;
+    flex-direction: row;
 }
