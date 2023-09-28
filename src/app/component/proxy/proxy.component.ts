@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import { Proxy } from 'src/app/model/types';
 import { ProxyService } from 'src/app/service/proxy.service';
 
@@ -11,18 +12,14 @@ export class ProxyComponent implements OnInit{
 
     proxies: Array<Proxy>;
     proxiesFiltered: Array<Proxy>;
-    providerFilter: Set<string>;
-    providerSelected: string;
-    protocolFilter: Set<string>;
-    protocolSelected: string;
+    providerFilter: Map<string, boolean>;
+    protocolFilter: Map<string, boolean>;
 
     constructor(private proxyService: ProxyService) {
         this.proxies = [];
         this.proxiesFiltered = [];
-        this.providerFilter = new Set<string>();
-        this.providerSelected = 'None';
-        this.protocolFilter = new Set<string>();
-        this.protocolSelected = 'None';
+        this.providerFilter = new Map<string, boolean>();
+        this.protocolFilter = new Map<string, boolean>();
     }
 
     ngOnInit(): void {
@@ -35,14 +32,14 @@ export class ProxyComponent implements OnInit{
             });
             for (let name of Object.keys(data)) {
                 if (name != 'default') {
-                    this.providerFilter.add(name);
+                    this.providerFilter.set(name, true);
                     data[name].proxies.forEach((element: Proxy) => {
                         element.provider = name;
                         element.chosen = element.name == chosen;
                         this.proxies.push(element);
                         this.proxiesFiltered.push(element);
                         if (element.type) {
-                            this.protocolFilter.add(element.type);
+                            this.protocolFilter.set(element.type, true);
                         }
                     });
                 }
@@ -50,21 +47,19 @@ export class ProxyComponent implements OnInit{
         });
     }
 
-    providerFilterChanged(): void {
-        this.proxiesFiltered = this.proxiesFiltered.filter(value => {
-            value.provider == this.providerSelected;
-        })
+    filterChange(filter: Map<string, boolean>, key: string, event: MatCheckboxChange) {
+        let checked = event.checked;
+        filter.set(key, checked);
+        this.applyFilter();
     }
 
-    protocolFilterChanged(): void {
-        this.proxiesFiltered = this.proxiesFiltered.filter(value => {
-            value.type == this.protocolSelected;
-        })
+    filterSelectAll(type: string) {
+        
     }
 
-    clearFilter() {
-        this.protocolSelected = 'None';
-        this.providerSelected = 'None';
-        this.proxiesFiltered = [...this.proxies];
+    private applyFilter() {
+        this.proxiesFiltered = this.proxies.filter(value => {
+            return value.provider && this.providerFilter.get(value.provider) && this.protocolFilter.get(value.type);
+        })
     }
 }

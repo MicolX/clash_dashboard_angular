@@ -1,22 +1,20 @@
 <div class="proxy-background">
     <h1>Proxy</h1>
     <div class="proxy-filter">
-        <h3>Filter: </h3>
-        <mat-form-field appearance="fill">
-            <mat-label>Provider</mat-label>
-            <mat-select [(value)]="providerSelected" placeholder="providerSelected" (selectionChange)="providerFilterChanged()">
-                <mat-option *ngFor="let provider of providerFilter" value="{{provider}}">{{provider}}</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>Protocol</mat-label>
-            <mat-select [(value)]="protocolSelected" placeholder="protocolSelected" (selectionChange)="protocolFilterChanged()">
-                <mat-option *ngFor="let protocol of protocolFilter" value="{{protocol}}">{{protocol}}</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <button mat-mini-fab color="warn" aria-label="Clear Filter" (click)="clearFilter()">
-            <mat-icon>delete</mat-icon>
-        </button>
+        <section class="proxy-filter-section">
+            <h4>Provider</h4>
+            <mat-checkbox *ngFor="let provider of providerFilter | keyvalue" 
+            [checked]="provider.value"
+            (change)="filterChange(providerFilter, provider.key, $event)"
+            >{{provider.key}}</mat-checkbox>
+        </section>
+        <section class="proxy-filter-section">
+            <h4>Protocol</h4>
+            <mat-checkbox *ngFor="let protocol of protocolFilter | keyvalue" 
+            [checked]="protocol.value"
+            (change)="filterChange(protocolFilter, protocol.key, $event)"
+            >{{protocol.key}}</mat-checkbox>
+        </section>
     </div>
     <div class="proxy-content-div">
         <mat-card class="proxy-card" [class.chosen-card]="proxy.chosen" *ngFor="let proxy of proxiesFiltered">
