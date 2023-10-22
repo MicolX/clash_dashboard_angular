@@ -44,6 +44,7 @@ export class ProxyComponent implements OnInit{
                     });
                 }
             }
+            this.proxiesFiltered.sort((a, b) => this.sort(a, b));
         });
     }
 
@@ -60,6 +61,17 @@ export class ProxyComponent implements OnInit{
     private applyFilter() {
         this.proxiesFiltered = this.proxies.filter(value => {
             return value.provider && this.providerFilter.get(value.provider) && this.protocolFilter.get(value.type);
-        })
+        }).sort((a, b) => this.sort(a, b));
+    }
+
+    private sort(a: Proxy, b: Proxy): number {
+        const da = a.history[0]?.delay || 0;
+        const db = b.history[0]?.delay || 0;
+        if (da == db) {
+            return a.name > b.name ? 1 : -1;
+        }
+        if (da == 0) return 1;
+        if (db == 0) return -1;
+        return da - db;
     }
 }

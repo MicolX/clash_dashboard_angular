@@ -56,7 +56,7 @@ export class BaseService {
   public handleLoginNext(version: Version) {
     this._version = version;
     if (this._login?.secret) {
-      this._params = this._params.set('token', encodeURIComponent(this._login?.secret));
+      this._params = this._params.set('token', this._login?.secret);
     }
   }
 

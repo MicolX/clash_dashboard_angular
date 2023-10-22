@@ -17,7 +17,10 @@
         </section>
     </div>
     <div class="proxy-content-div">
-        <mat-card class="proxy-card" [class.chosen-card]="proxy.chosen" *ngFor="let proxy of proxiesFiltered">
+        <mat-card class="proxy-card" 
+        [class.chosen-card]="proxy.chosen" 
+        [class.dead-card]="proxy.history[0].delay == 0" 
+        *ngFor="let proxy of proxiesFiltered">
             <mat-card-header>
                 <mat-card-title>{{proxy.name}}</mat-card-title>
                 <mat-card-subtitle>{{proxy.type}} | {{proxy.provider}}</mat-card-subtitle>

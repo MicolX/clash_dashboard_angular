@@ -5,8 +5,6 @@
 .sidenav-content {
     display: flex;
     height: 100%;
-    align-items: center;
-    justify-content: center;
 }
 .nav-container mat-toolbar {
     bottom: 0;

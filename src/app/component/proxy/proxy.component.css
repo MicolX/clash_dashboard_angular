@@ -1,11 +1,17 @@
 .proxy-card {
+    box-sizing: border-box;
     border-width: 5px;
     margin: 5px;
-    width: 200px;
+    width: 250px;
+    height: 150px;
 }
 
 .chosen-card {
     background-color: rgb(124, 252, 0);
+}
+
+.dead-card {
+    background-color: red;
 }
 
 .proxy-content-div {
@@ -31,8 +37,19 @@
 
 .proxy-filter-section {
     display: flex;
+    align-items: center;
 }
 
 .proxy-background {
     padding-left: 20px;
+}
+
+mat-card-header {
+    display: flow-root;
+}
+ 
+mat-card-title {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
