@@ -1,0 +1,17 @@
+.log-display-pre {
+    border: 1px solid;
+    padding: 20px;
+    border-radius: 25px;
+}
+
+.log-outer-div {
+    display: flex;
+    margin-left: 40px;
+    flex-direction: column;
+}
+
+.error-level {
+    color: red;
+}
+
+.log-line-div {}

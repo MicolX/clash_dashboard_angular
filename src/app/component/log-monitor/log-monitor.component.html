@@ -1,7 +1,10 @@
-<div>
+<div class="log-outer-div">
     <h1>Logs</h1>
-    <div *ngFor="let log of logs">
-        <span>{{ log.type }}</span>
-        <span>{{ log.payload }}</span>
-    </div>
+    <pre class="log-display-pre">
+        <div class="log-line-div" *ngFor="let log of logs">
+            <span [class.error-level]="log.type === 'error'">{{ log.type }}</span>
+            <span>{{ log.payload }}</span>
+        </div>
+    </pre>
+    
 </div>
